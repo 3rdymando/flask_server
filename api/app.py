@@ -15,7 +15,7 @@ CLASS_NAMES = ["Armyworm", "Cutworm", "Red Spider Mites"]
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 if not os.path.exists(MODEL_PATH):
-    gdown.download(id="https://drive.google.com/file/d/1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF/view?usp=sharing", MODEL_PATH)
+    gdown.download(id="https://drive.google.com/file/d/1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF/view?usp=sharing", output=MODEL_PATH)
     
 # Define preprocessing pipeline
 PREPROCESS = transforms.Compose([

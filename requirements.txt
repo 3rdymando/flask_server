@@ -1,7 +1,7 @@
-Flask
-torch
-torchvision
-Pillow
-numpy
-vercel-wsgi
-gdown
+Flask==2.2.5
+torch==2.0.1
+torchvision==0.15.2
+Pillow==9.5.0
+numpy==1.21.6
+gdown==4.7.1
+vercel-wsgi==0.0.3

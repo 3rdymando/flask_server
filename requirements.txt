@@ -4,5 +4,3 @@ torchvision
 Pillow
 numpy
 gdown
-vercel-wsgi
-python_version<3.11

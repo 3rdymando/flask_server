@@ -5,3 +5,4 @@ Pillow
 numpy
 gdown
 vercel-wsgi
+python<3.11

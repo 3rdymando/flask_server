@@ -4,6 +4,7 @@ import torch
 from torchvision import models, transforms
 from PIL import Image
 import numpy as np
+import urllib.request
 
 app = Flask(__name__)
 
@@ -13,6 +14,9 @@ NUM_CLASSES = 3
 CLASS_NAMES = ["Armyworm", "Cutworm", "Red Spider Mites"]
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+if not os.path.exists(MODEL_PATH):
+    urllib.request.urlretrieve("https://drive.google.com/file/d/1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF/view?usp=sharing", MODEL_PATH)
+    
 # Define preprocessing pipeline
 PREPROCESS = transforms.Compose([
     transforms.Resize((224, 224)),

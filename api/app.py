@@ -63,9 +63,3 @@ def predict():
         return jsonify({'prediction': CLASS_NAMES[predicted.item()]})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-# Vercel serverless handler
-from vercel_wsgi import handle_request
-
-def handler(environ, start_response):
-    return handle_request(app, environ, start_response)

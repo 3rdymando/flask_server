@@ -4,7 +4,7 @@ import torch
 from torchvision import models, transforms
 from PIL import Image
 import numpy as np
-import urllib.request
+import gdown
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ CLASS_NAMES = ["Armyworm", "Cutworm", "Red Spider Mites"]
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 if not os.path.exists(MODEL_PATH):
-    urllib.request.urlretrieve("https://drive.google.com/file/d/1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF/view?usp=sharing", MODEL_PATH)
+    gdown.download(id="https://drive.google.com/file/d/1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF/view?usp=sharing", MODEL_PATH)
     
 # Define preprocessing pipeline
 PREPROCESS = transforms.Compose([
@@ -30,8 +30,11 @@ try:
     model = models.inception_v3(pretrained=False, aux_logits=False)
     num_ftrs = model.fc.in_features
     model.fc = torch.nn.Sequential(
-        torch.nn.Linear(num_ftrs, 512),
-    )
+    torch.nn.Linear(num_ftrs, 512),
+    torch.nn.ReLU(),
+    torch.nn.Dropout(0.5),
+    torch.nn.Linear(512, NUM_CLASSES)
+)
     model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
     model.eval()
     print("***Loading model... Done.")
@@ -62,8 +65,7 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 # Vercel serverless handler
-from wsgiref.handlers import CGIHandler
-from aws_wsgi import handler
+from vercel_wsgi import handle_request
 
-def vercel_handler(event, context):
-    return handler(app, event, context)
+def handler(environ, start_response):
+    return handle_request(app, environ, start_response)

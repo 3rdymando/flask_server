@@ -1,5 +1,7 @@
-flask
+Flask
 torch
 torchvision
-pillow
-aws-wsgi
+Pillow
+numpy
+vercel-wsgi
+gdown

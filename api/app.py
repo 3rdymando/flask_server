@@ -13,10 +13,6 @@ MODEL_PATH = "../models/inceptionv3.pth"
 NUM_CLASSES = 3
 CLASS_NAMES = ["Armyworm", "Cutworm", "Red Spider Mites"]
 DEVICE = torch.device("cpu")
-
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model...")
-    gdown.download(id="1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF", output=MODEL_PATH)
     
 # Define preprocessing pipeline
 PREPROCESS = transforms.Compose([

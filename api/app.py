@@ -12,10 +12,11 @@ app = Flask(__name__)
 MODEL_PATH = "../models/inceptionv3.pth"
 NUM_CLASSES = 3
 CLASS_NAMES = ["Armyworm", "Cutworm", "Red Spider Mites"]
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cpu")
 
 if not os.path.exists(MODEL_PATH):
-    gdown.download(id="https://drive.google.com/file/d/1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF/view?usp=sharing", output=MODEL_PATH)
+    print("Downloading model...")
+    gdown.download(id="1efOvJ1pRjHnBjs2bf5jc2LjotA9tPybF", output=MODEL_PATH)
     
 # Define preprocessing pipeline
 PREPROCESS = transforms.Compose([
